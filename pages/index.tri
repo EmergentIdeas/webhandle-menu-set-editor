@@ -1,0 +1,21 @@
+__::start__
+<div>
+	<p> Menu Set Editor</p>
+	__externalResourceManager::@webhandle/menu-set-editor/addExternalResources__
+	<div id="menu-set-editor" style="height: 80vh">
+		
+			__::@webhandle/menu-set-editor/frame__
+		
+	</div>
+	<script type="module">
+		import { MenuSetEditor } from "@webhandle/menu-set-editor"
+		let mse = document.querySelector('#menu-set-editor')
+		let editor = new MenuSetEditor({
+			el: mse
+		})
+		editor.render()
+		
+	</script>
+</div>
+
+__::end__
