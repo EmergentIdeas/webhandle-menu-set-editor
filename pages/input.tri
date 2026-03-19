@@ -1,0 +1,41 @@
+__::start__
+<div>
+	<p> Input Test</p>
+	<div >
+		
+		<form >
+			<input type="text" id="in" name="test" />	
+			<button id="addtext">Add Text</button>
+		</form>
+		
+	</div>
+	<script type="module">
+		let input = document.querySelector('#in')
+		let addtext = document.querySelector('#addtext')
+		
+		
+		addtext.addEventListener('click', (evt) => {
+
+		})
+
+		input.addEventListener('input', (evt) => {
+
+			console.log(evt)
+			// evt.key = 'a'
+			// evt.keyCode = 97
+			// evt.charCode = 97
+			// evt.code = 97
+			// evt.data = 'b'
+			// console.log(evt)
+			
+			setTimeout(() => {
+				input.value = input.value.toLowerCase().replaceAll(/\s/gi, '-').replaceAll(/['"\[\]!@#$%^&*()=+{}<>,.?\/\\|`~:;]/gi, '-')
+
+			})
+
+		})
+		
+	</script>
+</div>
+
+__::end__

@@ -1,5 +1,6 @@
 import { View } from '@webhandle/backbone-view'
-import KalpaTreeView from "kalpa-tree-on-page/kalpa-tree-view"
+import {KalpaTreeView} from "kalpa-tree-on-page/kalpa-tree-view"
+import {Dialog, FormAnswerDialog} from "@webhandle/dialog"
 
 let data = {
 	menus: [
@@ -71,26 +72,96 @@ catch (e) {
 
 export class MenuSetEditor extends View {
 	currentMenu = "main"
+	curMaxId = 0
 
 	preinitialize(options) {
 		this.events = Object.assign({}, {
 			'click .image-holder a': 'linkClick'
 			, 'click .image-holder': 'chooseImage'
 			, 'click .delete-item': 'deleteItem'
+			, 'click .create-item': 'createItem'
+			, 'click .create-menu': 'createMenu'
 			, 'change select[name="availableMenus"]': 'changeMenu'
 			, 'click .browse': 'chooseImage'
 		}, options.events)
 		options.events = this.events
 	}
 	
+	findMaxId() {
+		let menu = this.getCurrentMenu()
+		let max = menu.nodes.reduce((max, node) => {
+			if(node.id > max) {
+				max = node.id
+			}
+			return max
+		}, 0)
+		return max
+	}
+	
+	createNewId() {
+		return ++this.curMaxId	
+	}
+	
+	watchInputForSlug(input) {
+		input.addEventListener('input', (evt) => {
+			setTimeout(() => {
+				this.fixInputForSlug(input)
+			})
+		})
+	}
+
+	fixInputForSlug(input) {
+		input.value = this.fixValueForSlug(input.value)
+	}
+
+	fixValueForSlug(value) {
+		value ||= ''
+		return value.toLowerCase().replaceAll(/\s/gi, '-').replaceAll(/['"\[\]!@#$%^&*()=+{}<>,.?\/\\|`~:;]/gi, '-')
+	}
+	
+	async createMenu(evt, selected) {
+
+		let dialog = new FormAnswerDialog({
+			body: '<label>New menu name: <br><input name="menuName" type="text" /></label>'
+			, title: 'Create a New Menu'
+			, showCancelButton: true
+		})
+		let menuInfo = await dialog.open()
+		if(menuInfo && menuInfo.menuName) {
+			let name = menuInfo.menuName
+			let newMenu = {
+				name: name
+				, nodes: [
+					{
+						id: 0
+						, label: name
+					}
+					, {
+						id: 1001
+						, parentId: 0
+						, label: 'first item'
+					}
+				]
+			}
+			data.menus.push(newMenu)
+			
+			let menuSelector = document.querySelector('select[name="availableMenus"]')
+			menuSelector.innerHTML += `<option value="${name}">${name}</option>`
+			menuSelector.value = name
+			this.changeMenu(null, menuSelector)
+		}
+	}
+
 	changeMenu(evt, selected) {
 		let selectedMenu = selected.value
 		this.saveCurrentMenu()
-		this.tree.tree.removeNode(0)
+		this.tree.tree.removeNode(0, { silent: true, animate: false })
 		this.currentMenu = selectedMenu
 		let newMenu = this.getCurrentMenu()
 		this.populateTreeForMenu(newMenu)
+		this.tree.tree.select(0)
 	}
+
 	deleteItem(evt, selected) {
 		let curItem = this.tree.tree.selected()
 		let parent = this.tree.tree.parent(curItem)
@@ -103,12 +174,34 @@ export class MenuSetEditor extends View {
 
 		}
 	}
+
+	createItem(evt, selected) {
+		let curItem = this.tree.tree.selected()
+		let parentId = 0
+		if(curItem && curItem.parentId) {
+			parentId = curItem.parentId
+		}
+		
+		let newId = this.createNewId()
+		let node = {
+			id: newId
+			, parentId: parentId
+			, label: 'item ' + newId
+		}
+		this.tree.tree.options.stream.emit('data', node)
+		this.tree.tree.select(newId)
+	}
 	
 	populateTreeForMenu(menu) {
 		for(let node of menu.nodes) {
 			this.tree.tree.options.stream.emit('data', node)
 		}
-
+		this.curMaxId = this.findMaxId()
+		// You'd think we're setting this too many times, but it doesn't work otherwise
+		let root = this.tree.tree.get()
+		this.tree.tree.select(root)
+		this.focusNode(this.tree.tree.get(0))
+		this.tree.tree.select(0)
 	}
 
 	getCurrentMenu() {
@@ -137,8 +230,6 @@ export class MenuSetEditor extends View {
 	async render() {
 		this.currentMenu = data.menus[0].name
 		
-		let nodes = data.menus[0].nodes
-
 		let holder = this.el.querySelector('.treebox')
 		let tree = this.tree = new KalpaTreeView({
 		})
@@ -147,9 +238,7 @@ export class MenuSetEditor extends View {
 
 		tree.tree.editable()
 		tree.events.on('select', (data) => {
-			console.log('select')
-			console.log(data)
-			this.focusNode(data)
+			this.focusNode(data.node)
 		})
 		
 		this.setupMenuOptions()

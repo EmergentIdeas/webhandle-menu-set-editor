@@ -1,13 +1,12 @@
-
 <div class="menu-set-editor-frame">
 	<div class="tree-side">
 		<div class="menu-controls">
 			<select name="availableMenus">
-				
+
 			</select>
 			<button type="button" class="btn create-menu" title="create new menu">
 				<span class="material-icons thumbnail-icon">
-					create
+					format_list_bulleted_add
 				</span>
 			</button>
 			<button type="button" class="btn delete-menu" title="delete selected menu">
