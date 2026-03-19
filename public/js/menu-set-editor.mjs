@@ -28,6 +28,31 @@ let data = {
 				}
 			]
 		}
+		, {
+			name: "admin"
+			, nodes: [
+
+				{
+					"id": 0,
+					"label": "admin",
+				}
+				, {
+					"id": 1002,
+					"label": "node 2",
+					"parentId": 0
+				}
+				, {
+					"id": 1003,
+					"label": "node 3",
+					"parentId": 0
+				}
+				, {
+					"id": 1004,
+					"label": "node 4",
+					"parentId": 1003
+				}
+			]
+		}
 	]
 }
 
@@ -52,11 +77,20 @@ export class MenuSetEditor extends View {
 			'click .image-holder a': 'linkClick'
 			, 'click .image-holder': 'chooseImage'
 			, 'click .delete-item': 'deleteItem'
+			, 'change select[name="availableMenus"]': 'changeMenu'
 			, 'click .browse': 'chooseImage'
 		}, options.events)
 		options.events = this.events
 	}
 	
+	changeMenu(evt, selected) {
+		let selectedMenu = selected.value
+		this.saveCurrentMenu()
+		this.tree.tree.removeNode(0)
+		this.currentMenu = selectedMenu
+		let newMenu = this.getCurrentMenu()
+		this.populateTreeForMenu(newMenu)
+	}
 	deleteItem(evt, selected) {
 		let curItem = this.tree.tree.selected()
 		let parent = this.tree.tree.parent(curItem)
@@ -75,6 +109,17 @@ export class MenuSetEditor extends View {
 			this.tree.tree.options.stream.emit('data', node)
 		}
 
+	}
+
+	getCurrentMenu() {
+		let menu = data.menus.filter(menu => menu.name === this.currentMenu)
+		return menu[0]
+	}
+
+	saveCurrentMenu() {
+		let nodes = this.tree.serializeTree()
+		let menu = this.getCurrentMenu()
+		menu.nodes = nodes
 	}
 
 	setupMenuOptions() {
@@ -108,7 +153,7 @@ export class MenuSetEditor extends View {
 		})
 		
 		this.setupMenuOptions()
-		this.populateTreeForMenu(data.menus[0])
+		this.populateTreeForMenu(this.getCurrentMenu())
 	}
 
 	focusNode(node) {
