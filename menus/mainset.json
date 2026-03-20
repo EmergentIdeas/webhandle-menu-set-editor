@@ -1,0 +1,57 @@
+{
+	"menus": [
+		{
+			"name": "primary",
+			"nodes": [
+				{
+					"id": 0,
+					"label": "main"
+				},
+				{
+					"id": "1002",
+					"label": "home",
+					"parentId": 0,
+					"url": "/",
+					"attributes": {},
+					"customClasses": "asfdasfasdf",
+					"image": ""
+				},
+				{
+					"id": 1003,
+					"label": "contact",
+					"parentId": 0,
+					"url": "/contact",
+					"attributes": {}
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"nodes": [
+				{
+					"id": 0,
+					"label": "admin"
+				},
+				{
+					"id": 1002,
+					"label": "node 2",
+					"parentId": 0
+				}
+			]
+		},
+		{
+			"name": "four",
+			"nodes": [
+				{
+					"id": 0,
+					"label": "four"
+				},
+				{
+					"id": 1001,
+					"parentId": 0,
+					"label": "first item"
+				}
+			]
+		}
+	]
+}

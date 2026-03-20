@@ -21,9 +21,12 @@
   "dependencies": {
     "@webhandle/backbone-view": "^1.0.4",
     "@webhandle/dialog": "^1.0.4",
+    "@webhandle/image-input": "^1.0.1",
     "@webhandle/initialize-webhandle-component": "^1.0.3",
     "@webhandle/material-icons": "^1.0.1",
     "@webhandle/site-editor-bridge": "^1.0.2",
-    "kalpa-tree-on-page": "^1.0.5"
+    "@webhandle/tree-file-browser": "^2.0.3",
+    "ei-form-styles-1": "^1.0.4",
+    "kalpa-tree-on-page": "^1.0.8"
   }
 }

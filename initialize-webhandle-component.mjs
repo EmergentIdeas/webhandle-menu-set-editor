@@ -6,6 +6,8 @@ import setupBackboneView from "@webhandle/backbone-view/initialize-webhandle-com
 import setupDialog from "@webhandle/dialog/initialize-webhandle-component.mjs"
 import siteEditorBridgeSetup from "@webhandle/site-editor-bridge/initialize-webhandle-component.mjs"
 import kalpaTreeSetup from "kalpa-tree-on-page/initialize-webhandle-component.mjs"
+import stylesSetup from "ei-form-styles-1/initialize-webhandle-component.mjs"
+import setupImageInput from "@webhandle/image-input/initialize-webhandle-component.mjs"
 
 
 
@@ -25,11 +27,13 @@ initializeWebhandleComponent.setup = async function(webhandle, config) {
 	let manager = new ComponentManager()
 	manager.config = config
 	
+	let kalpaTreeManager = await kalpaTreeSetup(webhandle)
 	let managerMaterialIcons = await setupMaterialIcons(webhandle)
 	setupBackboneView(webhandle)
-	let kalpaTreeManager = await kalpaTreeSetup(webhandle)
 	let managerDialog = await setupDialog(webhandle)
 	let siteEditorBridgeSetupManager = await siteEditorBridgeSetup(webhandle)
+	let stylesManager = await stylesSetup(webhandle)
+	let managerImageInput = await setupImageInput(webhandle)
 
 	webhandle.routers.preDynamic.use((req, res, next) => {
 		if(config.alwaysProvideResources || !initializeWebhandleComponent.supportsMultipleImportMaps(req)) {
@@ -42,6 +46,8 @@ initializeWebhandleComponent.setup = async function(webhandle, config) {
 		managerMaterialIcons.addExternalResources(externalResourceManager)
 		managerDialog.addExternalResources(externalResourceManager)
 		siteEditorBridgeSetupManager.addExternalResources(externalResourceManager)
+		stylesManager.addExternalResources(externalResourceManager)
+		managerImageInput.addExternalResources(externalResourceManager)
 
 		externalResourceManager.includeResource({
 			mimeType: 'text/css'
@@ -63,24 +69,24 @@ initializeWebhandleComponent.setup = async function(webhandle, config) {
 		return resources
 	})
 
-	webhandle.addTemplate(initializeWebhandleComponent.componentName + '/doTheThing', (data) => {
-		try {
-			let externalResourceManager = initializeWebhandleComponent.getExternalResourceManager(data)
-			manager.addExternalResources(externalResourceManager)
+	// webhandle.addTemplate(initializeWebhandleComponent.componentName + '/doTheThing', (data) => {
+	// 	try {
+	// 		let externalResourceManager = initializeWebhandleComponent.getExternalResourceManager(data)
+	// 		manager.addExternalResources(externalResourceManager)
 
-			let resources = externalResourceManager.render()
-			let action = `
-	<script type="module">
-			import { component } from "${initializeWebhandleComponent.componentName}"
-			component()
-	</script>`
+	// 		let resources = externalResourceManager.render()
+	// 		let action = `
+	// <script type="module">
+	// 		import { component } from "${initializeWebhandleComponent.componentName}"
+	// 		component()
+	// </script>`
 
-			return resources + action
-		}
-		catch(e) {
-			console.error(e)
-		}
-	})
+	// 		return resources + action
+	// 	}
+	// 	catch(e) {
+	// 		console.error(e)
+	// 	}
+	// })
 
 	// Allow access to the component and style code
 	let filePath = path.join(initializeWebhandleComponent.componentDir, initializeWebhandleComponent.staticFilePath)
