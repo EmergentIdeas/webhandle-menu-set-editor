@@ -69,24 +69,6 @@ initializeWebhandleComponent.setup = async function(webhandle, config) {
 		return resources
 	})
 
-	// webhandle.addTemplate(initializeWebhandleComponent.componentName + '/doTheThing', (data) => {
-	// 	try {
-	// 		let externalResourceManager = initializeWebhandleComponent.getExternalResourceManager(data)
-	// 		manager.addExternalResources(externalResourceManager)
-
-	// 		let resources = externalResourceManager.render()
-	// 		let action = `
-	// <script type="module">
-	// 		import { component } from "${initializeWebhandleComponent.componentName}"
-	// 		component()
-	// </script>`
-
-	// 		return resources + action
-	// 	}
-	// 	catch(e) {
-	// 		console.error(e)
-	// 	}
-	// })
 
 	// Allow access to the component and style code
 	let filePath = path.join(initializeWebhandleComponent.componentDir, initializeWebhandleComponent.staticFilePath)

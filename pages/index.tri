@@ -1,6 +1,6 @@
 __::start__
 <div>
-	<p> Menu Set Editor</p>
+	<h1> Menu Set Editor</h1>
 	__externalResourceManager::@webhandle/menu-set-editor/addExternalResources__
 	<div id="menu-set-editor" style="height: 80vh">
 		

@@ -1,32 +1,38 @@
 {
-  "name": "@webhandle/menu-set-editor",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "run-webhandle-dev ./test/start-server.mjs"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EmergentIdeas/webhandle-menu-set-editor.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "bugs": {
-    "url": "https://github.com/EmergentIdeas/webhandle-menu-set-editor/issues"
-  },
-  "homepage": "https://github.com/EmergentIdeas/webhandle-menu-set-editor#readme",
-  "dependencies": {
-    "@webhandle/backbone-view": "^1.0.4",
-    "@webhandle/dialog": "^1.0.4",
-    "@webhandle/image-input": "^1.0.1",
-    "@webhandle/initialize-webhandle-component": "^1.0.3",
-    "@webhandle/material-icons": "^1.0.1",
-    "@webhandle/site-editor-bridge": "^1.0.2",
-    "@webhandle/tree-file-browser": "^2.0.3",
-    "ei-form-styles-1": "^1.0.4",
-    "kalpa-tree-on-page": "^1.0.8"
-  }
+	"name": "@webhandle/menu-set-editor",
+	"version": "1.0.0",
+	"description": "",
+	"main": "initialize-webhandle-component.mjs",
+	"scripts": {
+		"test": "run-webhandle-dev ./test/start-server.mjs"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/EmergentIdeas/webhandle-menu-set-editor.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"bugs": {
+		"url": "https://github.com/EmergentIdeas/webhandle-menu-set-editor/issues"
+	},
+	"homepage": "https://github.com/EmergentIdeas/webhandle-menu-set-editor#readme",
+	"dependencies": {
+		"@webhandle/backbone-view": "^1.0.4",
+		"@webhandle/dialog": "^1.0.4",
+		"@webhandle/image-input": "^1.0.1",
+		"@webhandle/initialize-webhandle-component": "^1.0.3",
+		"@webhandle/material-icons": "^1.0.1",
+		"@webhandle/site-editor-bridge": "^1.0.2",
+		"@webhandle/tree-file-browser": "^2.0.3",
+		"ei-form-styles-1": "^1.0.4",
+		"kalpa-tree-on-page": "^1.0.8"
+	},
+	"files": [
+		"public"
+		, "views/@webhandle"
+		, "README.md"
+		, "initialize-webhandle-component.mjs"
+	]
 }
