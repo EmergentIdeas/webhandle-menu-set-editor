@@ -1,10 +1,9 @@
 __::start__
 <div>
 	<h1> Menu Set Editor</h1>
-	__externalResourceManager::@webhandle/menu-set-editor/addExternalResources__
+	__::@webhandle/menu-set-editor/prepare__
 	<div id="menu-set-editor" style="height: 80vh">
 		
-			__::@webhandle/menu-set-editor/frame__
 		
 	</div>
 	<script type="module">

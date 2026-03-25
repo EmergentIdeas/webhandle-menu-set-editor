@@ -9,19 +9,19 @@
 				},
 				{
 					"id": "1002",
-					"label": "home",
-					"parentId": 0,
+					"label": "home2",
 					"url": "/",
 					"attributes": {},
 					"customClasses": "asfdasfasdf",
-					"image": ""
+					"image": "",
+					"parentId": 0
 				},
 				{
 					"id": 1003,
 					"label": "contact",
-					"parentId": 0,
 					"url": "/contact",
-					"attributes": {}
+					"attributes": {},
+					"parentId": 0
 				}
 			]
 		},
@@ -35,7 +35,8 @@
 				{
 					"id": 1002,
 					"label": "node 2",
-					"parentId": 0
+					"parentId": 0,
+					"attributes": {}
 				}
 			]
 		},

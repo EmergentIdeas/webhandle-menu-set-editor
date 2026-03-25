@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "initialize-webhandle-component.mjs",
 	"scripts": {
-		"test": "run-webhandle-dev ./test/start-server.mjs"
+		"test": "run-webhandle-inspect ./test/start-server.mjs"
 	},
 	"repository": {
 		"type": "git",
@@ -25,14 +25,14 @@
 		"@webhandle/initialize-webhandle-component": "^1.0.3",
 		"@webhandle/material-icons": "^1.0.1",
 		"@webhandle/site-editor-bridge": "^1.0.2",
-		"@webhandle/tree-file-browser": "^2.0.3",
+		"@webhandle/tree-file-browser": "^2.0.6",
 		"ei-form-styles-1": "^1.0.4",
 		"kalpa-tree-on-page": "^1.0.8"
 	},
 	"files": [
-		"public"
-		, "views/@webhandle"
-		, "README.md"
-		, "initialize-webhandle-component.mjs"
+		"public",
+		"views/@webhandle",
+		"README.md",
+		"initialize-webhandle-component.mjs"
 	]
 }

@@ -1,0 +1,72 @@
+<div class="ei-form-styles">
+	<input type="hidden" name="id" />
+	<label>
+		Label
+		<input name="label" type="text" />
+	</label>
+	<label>
+		URL
+		<input name="url" type="text" />
+	</label>
+	<label>
+		Custom classes
+		<input name="customClasses" type="text" />
+	</label>
+	<label>
+		Image
+		<input name="image" type="hidden" data-view-component="@webhandle/image-input" />
+	</label>
+	<h2>
+		Attributes
+	</h2>
+	<table border="1">
+		<tbody>
+			<tr>
+				<th>Attribute name</th>
+				<th>Value</th>
+			</tr>
+			<tr>
+				<td>
+					<input name="attrName" type="text">
+				</td>
+				<td>
+					<input name="attrValue" type="text">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input name="attrName" type="text">
+				</td>
+				<td>
+					<input name="attrValue" type="text">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input name="attrName" type="text">
+				</td>
+				<td>
+					<input name="attrValue" type="text">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input name="attrName" type="text">
+				</td>
+				<td>
+					<input name="attrValue" type="text">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input name="attrName" type="text">
+				</td>
+				<td>
+					<input name="attrValue" type="text">
+				</td>
+			</tr>
+
+		</tbody>
+
+	</table>
+</div>

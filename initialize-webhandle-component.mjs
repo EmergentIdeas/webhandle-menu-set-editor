@@ -8,6 +8,7 @@ import siteEditorBridgeSetup from "@webhandle/site-editor-bridge/initialize-webh
 import kalpaTreeSetup from "kalpa-tree-on-page/initialize-webhandle-component.mjs"
 import stylesSetup from "ei-form-styles-1/initialize-webhandle-component.mjs"
 import setupImageInput from "@webhandle/image-input/initialize-webhandle-component.mjs"
+import treeFileBrowserSetup from "@webhandle/tree-file-browser/initialize-webhandle-component.mjs"
 
 
 
@@ -33,6 +34,7 @@ initializeWebhandleComponent.setup = async function(webhandle, config) {
 	let managerDialog = await setupDialog(webhandle)
 	let siteEditorBridgeSetupManager = await siteEditorBridgeSetup(webhandle)
 	let stylesManager = await stylesSetup(webhandle)
+	let treeFileBrowserManager = await treeFileBrowserSetup(webhandle)
 	let managerImageInput = await setupImageInput(webhandle)
 
 	webhandle.routers.preDynamic.use((req, res, next) => {
@@ -47,6 +49,8 @@ initializeWebhandleComponent.setup = async function(webhandle, config) {
 		managerDialog.addExternalResources(externalResourceManager)
 		siteEditorBridgeSetupManager.addExternalResources(externalResourceManager)
 		stylesManager.addExternalResources(externalResourceManager)
+		kalpaTreeManager.addExternalResources(externalResourceManager)
+		treeFileBrowserManager.addExternalResources(externalResourceManager)
 		managerImageInput.addExternalResources(externalResourceManager)
 
 		externalResourceManager.includeResource({

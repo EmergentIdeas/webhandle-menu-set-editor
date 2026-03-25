@@ -2,6 +2,7 @@ import { View } from '@webhandle/backbone-view'
 import { KalpaTreeView } from "kalpa-tree-on-page/kalpa-tree-view"
 import { Dialog, FormAnswerDialog, formValueInjector, gatherFormData } from "@webhandle/dialog"
 import { ImageInput } from "@webhandle/image-input"
+import { tripartite } from "tripartite"
 
 let starterData = {
 	menus: [
@@ -37,6 +38,8 @@ export class MenuSetEditor extends View {
 	curMaxId = 0
 	data
 	fileName = 'mainset.json'
+	detailsTemplateName = '@webhandle/menu-set-editor/menu-item-details'
+	frameTemplateName = '@webhandle/menu-set-editor/frame'
 
 	preinitialize(options) {
 		this.events = Object.assign({}, {
@@ -59,6 +62,7 @@ export class MenuSetEditor extends View {
 	
 	
 	async saveMenus() {
+		this.saveCurrentMenu()
 		await sinkMenus.write(this.fileName, JSON.stringify(this.data, null, '\t'))
 		alert('The menu was saved.')
 	}
@@ -273,8 +277,11 @@ export class MenuSetEditor extends View {
 	async render() {
 		await this.loadData()
 		
-		
 		this.currentMenu = this.data.menus[0].name
+		if(this.frameTemplateName) {
+			let frameTemplate = await tripartite.loadTemplateAsync(this.frameTemplateName)
+			this.el.innerHTML = frameTemplate()
+		}
 
 		let holder = this.el.querySelector('.treebox')
 		let tree = this.tree = new KalpaTreeView({
@@ -291,9 +298,9 @@ export class MenuSetEditor extends View {
 		this.populateTreeForMenu(this.getCurrentMenu())
 	}
 	
-	getFormHTML(node) {
-		let itemDetailsTemplate = this.el.querySelector("#menu-item-details-template");
-		return itemDetailsTemplate.innerHTML.trim()
+	async getFormHTML(node) {
+		let details = await tripartite.loadTemplateAsync(this.detailsTemplateName)
+		return details(node)
 	}
 	
 	updateNodeView(node) {
@@ -332,13 +339,13 @@ export class MenuSetEditor extends View {
 		return nodeView
 	}
 
-	focusNode(node) {
+	async focusNode(node) {
 		let nodeView = this.getNodeView()
 		if (node.parentId === undefined || node.parentId === null) {
 			nodeView.innerHTML = '<p>Choose a menu item from the tree to edit or select another menu from the drop down.</p>'
 		}
 		else {
-			let formHtml = this.getFormHTML(node)
+			let formHtml = await this.getFormHTML(node)
 			nodeView.innerHTML = formHtml
 			this.updateNodeView(node)
 
