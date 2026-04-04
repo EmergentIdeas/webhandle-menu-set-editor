@@ -1,10 +1,10 @@
 {
 	"name": "@webhandle/menu-set-editor",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "",
 	"main": "initialize-webhandle-component.mjs",
 	"scripts": {
-		"test": "run-webhandle-inspect ./test/start-server.mjs"
+		"test": "export webhandleConfigFile=./conf/dev.json; run-webhandle-inspect ./test/start-server.mjs"
 	},
 	"repository": {
 		"type": "git",

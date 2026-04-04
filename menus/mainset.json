@@ -14,14 +14,20 @@
 					"attributes": {},
 					"customClasses": "asfdasfasdf",
 					"image": "",
-					"parentId": 0
+					"parentId": 0,
+					"shortDescription": "ab"
 				},
 				{
-					"id": 1003,
+					"id": "1003",
 					"label": "contact",
 					"url": "/contact",
-					"attributes": {},
-					"parentId": 0
+					"attributes": {
+						"one": "two"
+					},
+					"parentId": 0,
+					"customClasses": "a",
+					"shortDescription": "asdfas",
+					"image": ""
 				}
 			]
 		},

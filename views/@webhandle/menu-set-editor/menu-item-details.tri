@@ -13,6 +13,10 @@
 		<input name="customClasses" type="text" />
 	</label>
 	<label>
+		Short description
+		<input name="shortDescription" type="text" />
+	</label>
+	<label>
 		Image
 		<input name="image" type="hidden" data-view-component="@webhandle/image-input" />
 	</label>

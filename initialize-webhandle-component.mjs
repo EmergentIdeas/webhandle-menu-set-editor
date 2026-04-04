@@ -10,8 +10,6 @@ import stylesSetup from "ei-form-styles-1/initialize-webhandle-component.mjs"
 import setupImageInput from "@webhandle/image-input/initialize-webhandle-component.mjs"
 import treeFileBrowserSetup from "@webhandle/tree-file-browser/initialize-webhandle-component.mjs"
 
-
-
 const initializeWebhandleComponent = createInitializeWebhandleComponent()
 
 initializeWebhandleComponent.componentName = '@webhandle/menu-set-editor'
